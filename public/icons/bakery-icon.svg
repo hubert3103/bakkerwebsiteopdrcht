@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#B45309"/>
+  
+  <!-- Bread icon -->
+  <path d="M256 128C192 128 144 160 144 208C144 240 160 264 184 280C168 296 160 316 160 336C160 384 203.2 416 256 416C308.8 416 352 384 352 336C352 316 344 296 328 280C352 264 368 240 368 208C368 160 320 128 256 128Z" 
+        fill="#FDE68A" 
+        stroke="#FFFBEB" 
+        stroke-width="16"/>
+  
+  <!-- Steam lines -->
+  <path d="M208 120C208 120 224 96 256 96C288 96 304 120 304 120" 
+        stroke="#FFFBEB" 
+        stroke-width="16" 
+        stroke-linecap="round"/>
+</svg> 
