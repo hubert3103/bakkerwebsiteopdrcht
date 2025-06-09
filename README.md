@@ -1,4 +1,4 @@
-# Project Title
+# Bakkerij het witte bolletje
 
 A modern, scalable web application built with [Next.js](https://nextjs.org), TypeScript, Tailwind CSS, and Shadcn UI. This project follows best practices for maintainability, accessibility, and performance.
 
