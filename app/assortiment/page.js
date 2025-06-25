@@ -54,6 +54,18 @@ const products = {
   ]
 }
 
+const imageMap = {
+	'Wit Brood': '/wit_brood.jpg',
+	'Volkoren': '/volkoren_brood.jpeg',
+	'Zuurdesem': '/Zuurdesem_brood.jpg',
+	'Appelgebak': '/appeltaart.jpg',
+	'Slagroomtaart': '/slagroomtaart.jpg',
+	'Chocolade Muffins': '/chocolade_muffins.jpg',
+	'Boterkoekjes': '/boterkoekje.jpg',
+	'Gevulde Koeken': '/Gevulde-koeken.jpg',
+	'Chocolate Chip Cookies': '/choco_cookies_1920x1080.jpg',
+}
+
 export default function Assortiment() {
   return (
     <div className="space-y-12">
@@ -69,6 +81,17 @@ export default function Assortiment() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.brood.map((product) => (
               <div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
+                {imageMap[product.name] && (
+                  <div className="relative w-full h-40 mb-4">
+                    <Image
+                      src={imageMap[product.name]}
+                      alt={product.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded"
+                    />
+                  </div>
+                )}
                 <h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-amber-800 font-medium mt-4">{product.price}</p>
@@ -83,6 +106,17 @@ export default function Assortiment() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.gebak.map((product) => (
               <div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
+                {imageMap[product.name] && (
+                  <div className="relative w-full h-40 mb-4">
+                    <Image
+                      src={imageMap[product.name]}
+                      alt={product.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded"
+                    />
+                  </div>
+                )}
                 <h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-amber-800 font-medium mt-4">{product.price}</p>
@@ -97,6 +131,17 @@ export default function Assortiment() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.koekjes.map((product) => (
               <div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
+                {imageMap[product.name] && (
+                  <div className="relative w-full h-40 mb-4">
+                    <Image
+                      src={imageMap[product.name]}
+                      alt={product.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded"
+                    />
+                  </div>
+                )}
                 <h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-amber-800 font-medium mt-4">{product.price}</p>
