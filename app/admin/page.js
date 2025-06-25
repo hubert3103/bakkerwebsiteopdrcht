@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const initialPrices = {
 	'Wit Brood': '€2,95',
@@ -14,11 +14,20 @@ const initialPrices = {
 	'Chocolate Chip Cookies': '€1,95',
 }
 
+const LOCAL_STORAGE_KEY = 'bakkerij-prices'
+
 export default function AdminPage () {
 	const [loggedIn, setLoggedIn] = useState(false)
 	const [form, setForm] = useState({ username: '', password: '' })
 	const [prices, setPrices] = useState(initialPrices)
 	const [message, setMessage] = useState('')
+
+	useEffect(() => {
+		const stored = localStorage.getItem(LOCAL_STORAGE_KEY)
+		if (stored) {
+			setPrices(JSON.parse(stored))
+		}
+	}, [])
 
 	const handleLogin = (e) => {
 		e.preventDefault()
@@ -37,11 +46,16 @@ export default function AdminPage () {
 
 	const handlePriceChange = (e, product) => {
 		const { value } = e.target
-		setPrices((prev) => ({ ...prev, [product]: value }))
+		setPrices((prev) => {
+			const updated = { ...prev, [product]: value }
+			localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated))
+			return updated
+		})
 	}
 
 	const handleSave = (e) => {
 		e.preventDefault()
+		localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(prices))
 		setMessage('Prijzen opgeslagen! (Alleen lokaal)')
 	}
 

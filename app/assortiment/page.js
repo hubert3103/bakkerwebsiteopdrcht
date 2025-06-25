@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 const products = {
   brood: [
@@ -66,90 +67,112 @@ const imageMap = {
 	'Chocolate Chip Cookies': '/choco_cookies_1920x1080.jpg',
 }
 
+const LOCAL_STORAGE_KEY = 'bakkerij-prices'
+const defaultPrices = {
+	'Wit Brood': '€2,95',
+	'Volkoren': '€3,25',
+	'Zuurdesem': '€3,95',
+	'Appelgebak': '€2,75',
+	'Slagroomtaart': '€16,95',
+	'Chocolade Muffins': '€2,50',
+	'Boterkoekjes': '€4,95',
+	'Gevulde Koeken': '€2,25',
+	'Chocolate Chip Cookies': '€1,95',
+}
+
 export default function Assortiment() {
-  return (
-    <div className="space-y-12">
-      <section className="text-center space-y-4">
-        <h1 className="text-4xl font-bold text-amber-800">Ons Assortiment</h1>
-        <p className="text-xl text-amber-700">Ontdek onze verse producten</p>
-      </section>
+	const [prices, setPrices] = useState(defaultPrices)
 
-      <div className="space-y-16">
-        {/* Brood sectie */}
-        <section>
-          <h2 className="text-2xl font-semibold text-amber-800 mb-6">Brood</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.brood.map((product) => (
-              <div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
-                {imageMap[product.name] && (
-                  <div className="relative w-full h-40 mb-4">
-                    <Image
-                      src={imageMap[product.name]}
-                      alt={product.name}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      className="rounded"
-                    />
-                  </div>
-                )}
-                <h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
-                <p className="text-gray-600 mt-2">{product.description}</p>
-                <p className="text-amber-800 font-medium mt-4">{product.price}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+	useEffect(() => {
+		const stored = localStorage.getItem(LOCAL_STORAGE_KEY)
+		if (stored) {
+			setPrices(JSON.parse(stored))
+		}
+	}, [])
 
-        {/* Gebak sectie */}
-        <section>
-          <h2 className="text-2xl font-semibold text-amber-800 mb-6">Gebak</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.gebak.map((product) => (
-              <div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
-                {imageMap[product.name] && (
-                  <div className="relative w-full h-40 mb-4">
-                    <Image
-                      src={imageMap[product.name]}
-                      alt={product.name}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      className="rounded"
-                    />
-                  </div>
-                )}
-                <h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
-                <p className="text-gray-600 mt-2">{product.description}</p>
-                <p className="text-amber-800 font-medium mt-4">{product.price}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+	return (
+		<div className="space-y-12">
+			<section className="text-center space-y-4">
+				<h1 className="text-4xl font-bold text-amber-800">Ons Assortiment</h1>
+				<p className="text-xl text-amber-700">Ontdek onze verse producten</p>
+			</section>
 
-        {/* Koekjes sectie */}
-        <section>
-          <h2 className="text-2xl font-semibold text-amber-800 mb-6">Koekjes</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.koekjes.map((product) => (
-              <div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
-                {imageMap[product.name] && (
-                  <div className="relative w-full h-40 mb-4">
-                    <Image
-                      src={imageMap[product.name]}
-                      alt={product.name}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      className="rounded"
-                    />
-                  </div>
-                )}
-                <h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
-                <p className="text-gray-600 mt-2">{product.description}</p>
-                <p className="text-amber-800 font-medium mt-4">{product.price}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    </div>
-  )
+			<div className="space-y-16">
+				{/* Brood sectie */}
+				<section>
+					<h2 className="text-2xl font-semibold text-amber-800 mb-6">Brood</h2>
+					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+						{products.brood.map((product) => (
+							<div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
+								{imageMap[product.name] && (
+									<div className="relative w-full h-40 mb-4">
+										<Image
+											src={imageMap[product.name]}
+											alt={product.name}
+											fill
+											style={{ objectFit: 'cover' }}
+											className="rounded"
+										/>
+									</div>
+								)}
+								<h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
+								<p className="text-gray-600 mt-2">{product.description}</p>
+								<p className="text-amber-800 font-medium mt-4">{prices[product.name] || product.price}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				{/* Gebak sectie */}
+				<section>
+					<h2 className="text-2xl font-semibold text-amber-800 mb-6">Gebak</h2>
+					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+						{products.gebak.map((product) => (
+							<div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
+								{imageMap[product.name] && (
+									<div className="relative w-full h-40 mb-4">
+										<Image
+											src={imageMap[product.name]}
+											alt={product.name}
+											fill
+											style={{ objectFit: 'cover' }}
+											className="rounded"
+										/>
+									</div>
+								)}
+								<h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
+								<p className="text-gray-600 mt-2">{product.description}</p>
+								<p className="text-amber-800 font-medium mt-4">{prices[product.name] || product.price}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				{/* Koekjes sectie */}
+				<section>
+					<h2 className="text-2xl font-semibold text-amber-800 mb-6">Koekjes</h2>
+					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+						{products.koekjes.map((product) => (
+							<div key={product.name} className="bg-white p-6 rounded-lg shadow-md">
+								{imageMap[product.name] && (
+									<div className="relative w-full h-40 mb-4">
+										<Image
+											src={imageMap[product.name]}
+											alt={product.name}
+											fill
+											style={{ objectFit: 'cover' }}
+											className="rounded"
+										/>
+									</div>
+								)}
+								<h3 className="text-lg font-semibold text-amber-700">{product.name}</h3>
+								<p className="text-gray-600 mt-2">{product.description}</p>
+								<p className="text-amber-800 font-medium mt-4">{prices[product.name] || product.price}</p>
+							</div>
+						))}
+					</div>
+				</section>
+			</div>
+		</div>
+	)
 } 
