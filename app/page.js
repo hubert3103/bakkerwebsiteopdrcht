@@ -11,7 +11,7 @@ export default function Home() {
       <div className="grid md:grid-cols-2 gap-8 items-center">
         <div className="relative h-[400px] rounded-lg overflow-hidden">
           <Image
-            src="/bakery-front.jpg"
+            src="/bakkerij_voorkant.jpg"
             alt="Voorkant van bakkerij Het witte bolletje"
             fill
             style={{ objectFit: 'cover' }}
